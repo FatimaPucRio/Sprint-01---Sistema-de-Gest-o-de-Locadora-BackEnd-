@@ -219,7 +219,6 @@ def atualiza_cliente(conn: sqlite3.Connection, cliente_id: int):
       404:
         description: Cliente não encontrado
     """
-    # PONTO DE REVERSÃO: Sem a checagem de Content-Type/Erro 415
     dados = request.get_json()
 
     set_clauses, params = [], []
@@ -234,7 +233,6 @@ def atualiza_cliente(conn: sqlite3.Connection, cliente_id: int):
     for key, value in dados.items():
         if key == 'data_nascimento':
             try:
-                # PONTO DE REVERSÃO: Sem a checagem de value.strip()
                 valida_idade(value)
                 set_clauses.append("data_nascimento = ?")
                 params.append(value)
